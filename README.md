@@ -130,8 +130,19 @@ Thus we have successfully set up a **CI/CD pipeline** where once the developer p
 
 Finally, this is the task of the **Quality Assurance Team**. When the team certifies that the `dev1` branch is working fine, they can merge it with the `master` branch using **Remote Build Triggers**.
 
-Again, to setup the Trigger we are going to use **Jenkins** to do the automation.
-
+To setup the Trigger we are going to use **Jenkins** to do the automation:
+1. Select **new item** option from the Jenkins menu. 
+2. Assign a name to the Job ( eg. Merge-test )and select it to be a **Freestyle** project.
+3. From the **Configure Job** option, we set the configurations.
+4. From **Source Code Management** section, we select Git and mention the URL of our GitHub Repository and select the branch to build as `dev1`.
+5. From the **Additional Behavior** Dropdown list, we select `Merge Before Build`
+6. There, we set the **Name of the Repository** as `origin` 
+7. We set the **Branch to Merge to** as `master`
+8. From the **Build Triggers** section, we select **Trigger builds remotely** option.
+9. Provide an **Authentication Token**
+10. From the **Post Build Actions** dropdown, we select **Git Publisher**.
+11. We check **Push only if build succeeds** and **Merge Results** options.
+12.  On clicking the **Save** option, we add the Job to our Job List.
 
 
 
