@@ -2,7 +2,8 @@
 
 This is the repository where the Project has been uploaded.
 
-### 1. Setting up the Developer/Host  System
+
+### 1. Setting up the Development/Host  System
 
 This is the system in which the developer works. We are considering it to be **Windows**. Here, Git is installed and authenticated. To make this project more realistic, we are going to work on 2 GitHub branches:
 - master
@@ -61,7 +62,65 @@ Now, lets configure Jenkins to do all those tasks.
 Lets start the Jenkins process from RHEL 8 by the command: `systemctl start jenkins`<br>
 Now, on visiting the port **8080**, we can see the Jenkins Control Panel running.
 
-But, we are going to configure it from Host / Developer system 
+But, we are going to configure it from Host / Developer system by getting the IP address of RHEL. <br> For that we use the command `ifconfig enp0s3`
+
+After getting the IP Address, from any browser of the **Host System**, we can direct to the IP address.<br>
+for e.g. `http://192.123.32.2932:8080` <br>
+After logging in with both the username and password as `admin`, we come to the Jobs List page. Here we can see the Jobs we have submitted to be performed.
+
+#### 3.1. Task-1 : Automatic Code Download 
+
+For now, we have to create new Jobs for downloading the latest codes from **both** the branches of Github separately, to the Server system, for being deployed on the Web-server.<br>
+i.e. The `master` branch should be downloaded in the `lwtest` folder and the `dev1` branch would be downloaded in the `lwtestdev` folder.
+
+For creating the Job for downloading codes from the **master** branch:
+1. Select `new item` option from the Jenkins menu. 
+2. Assign a name to the Job ( eg. lwtest-1 )and select it to be a `Freestyle` project.
+3. From the `Configure Job` option, we set the configurations.
+4. From **Source Code Management** section, we select Git and mention the URL of our GitHub Repository and select the branch as `master`.
+5. In the **Build Triggers** section, we select `Poll SCM` and set the value to `* * * * *`.<br> **This means that the Job would check any code change from GitHub every minute.**
+6. In the Build Section, we type the following script:
+			`sudo cp -v -r -f * /root/Desktop/lwtest`
+   **This command would copy all the content downloaded from the GitHub master branch to the specified folder for deployment.**
+7. On clicking the **Save** option, we add the Job to our Job List.
+
+On coming back to the Job List page, we can see the **Job** is being built. If the color of the ball turns **blue**, it means the Job has been successfully excecuted. If the color changes to **red**, it means there has been some error in between. We can see the console output to check the error.
+
+**The same process can be performed to create another Job `lwtest-2` for the `dev1` branch. Only the branch name needs to be changed to `dev1` and the script:**<br>`sudo cp -v -r -f * /root/Desktop/lwtestdev`
+
+Till now, we have successfully downloaded the codes from both the branches of GitHub to our Server System automatically.
+
+
+#### 3.2. Task-2 : Automatically Starting the Docker containers
+
+
+Next, we create another Job for starting the docker containers once the codes have been copied into the `lwtest` and `lwtestdev` folders.
+
+For starting the docker container once the `lwtest` folder updates from the **master** branch:
+1.  Select `new item` option from the Jenkins menu. 
+2.  Assign a name to the Job ( eg. lwtest-1-docker )and select it to be a `Freestyle` project.
+3.  From the `Configure Job` option, we set the configurations.
+4.  From **Build Triggers** section, we select `Build after other projects are built` and mention `lwtest` as the project to watch.
+
+**This is called DownStreaming **
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
