@@ -1,4 +1,4 @@
-# Linux World DevOps Training  (Under construction)
+# Linux World DevOps Training  (Under construction) 
 
 This is the repository where the Project has been uploaded.
 
@@ -42,7 +42,16 @@ Now, we have setup 2 branches in Github, having some differential codes.
 
 ### 2. Setting up the Server System
 
-This is the system where the Web Server will be running. We are going to use 
+This is the system where the Web Server will be running. We are going to use Docker to run 2 `httpd` servers, one for deploying the `master` branch and the other for the `dev1` branch. We are going to use RHEL 8 as the Operating System to host the Docker containers.<br>
+
+As we are going to automate the process, we are going to configure Jenkins for creating the CI/CD pipeline.<br>
+
+**Jenkins** would do 2 important tasks for each of the branches:
+- Dowloading any code changes from GitHub to the server system.
+- Starting the Webserver from Docker containers, to view the final website.
+
+Jenkins would do another important task from the **Quality Assurance Team**. If the `dev1` branch is working fine, then Jenkins would merge it with the `master` branch, on being triggered to do so.
+
 
 
 
