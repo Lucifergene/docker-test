@@ -8,11 +8,7 @@ This is the system in which the developer works. We are considering it to be **W
 - master
 - dev1
 
-First we open the Git Bash. We create 2 directories on our Desktop.
-- master_folder
-- dev1_folder
-
-Then, we create a new repository in GitHub. We copy the clone url of the repository and clone the it in the master_folder using `git clone <repo url>`.
+First, we create a new repository in GitHub. We copy the clone url of the repository and clone the it in the Desktop using `git clone <repo url>`.
 
 We move inside the folder just created and create an `index.html` file.
 Inside the file, lets type	<br>
@@ -50,7 +46,12 @@ As we are going to automate the process, we are going to configure Jenkins for c
 - Dowloading any code changes from GitHub to the server system.
 - Starting the Webserver from Docker containers, to view the final website.
 
-Jenkins would do another important task from the **Quality Assurance Team**. If the `dev1` branch is working fine, then Jenkins would merge it with the `master` branch, on being triggered to do so.
+**Jenkins** would do another important task from the **Quality Assurance Team**. If the `dev1` branch is working fine, then Jenkins would merge it with the `master` branch, on being triggered to do so.
+
+We create 2 directories on our Desktop.
+- lwtest
+- lwtestdev
+
 
 
 
