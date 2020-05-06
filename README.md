@@ -100,9 +100,37 @@ For starting the docker container once the `lwtest` folder updates from the **ma
 1.  Select `new item` option from the Jenkins menu. 
 2.  Assign a name to the Job ( eg. lwtest-1-docker )and select it to be a `Freestyle` project.
 3.  From the `Configure Job` option, we set the configurations.
-4.  From **Build Triggers** section, we select `Build after other projects are built` and mention `lwtest` as the project to watch.
+4.  From **Build Triggers** section, we select `Build after other projects are built` and mention `lwtest` as the project to watch. This is called **DownStreaming**.
+5.  In the **Build** Section, we type the following script:
+```
+if sudo docker ps | grep docker_master
+then
+echo "Already Running"
+else
+sudo docker run -d  -t -i -p 8085:80 -v /root/Desktop/lwtest:/usr/local/apache2/htdocs/ --name docker_master httpd
+fi
+```
 
-**This is called DownStreaming **
+This script first checks if any Docker container has been already created, in such case it exits. <br>
+Else, it starts a new Docker container of the `httpd` webserver, with some parameters:
+- Runs the container in background : `-d`
+- Exposes the port so that the container can be operated from outside the Server system (RHEL)
+- Mounts the `lwtest` folder on the `htdocs` folder, from where the webserver renders the pages.
+- Sets the name of the container as `docker_master`
+6. On clicking the **Save** option, we add the Job to our Job List.
+
+**The same process can be performed to create another Job `lwtest-2-docker` for starting the docker containers once the `lwtestdev` folder updates from the `dev1` branch.**<br> **Only the build trigger needs to be set to watch `lwtestdev` and the corresponding folder name should be changed in the script.**
+
+These 2 Jobs would automatically run just after the codes are updated in the respective folders, by the previous jobs.
+
+Thus we have successfully set up a **CI/CD pipeline** where once the developer pushes the code on GitHub, **Jenkins** would automatically download the codes and start the **Docker containers** to run the Web-Server.
+
+
+#### 3.3. Task-3 : Merging the `dev1` branch with `master` by QAT
+
+Finally, this is the task of the **Quality Assurance Team**. When the team certifies that the `dev1` branch is working fine, they can merge it with the `master` branch using **Remote Build Triggers**.
+
+Again, to setup the Trigger we are going to use **Jenkins** to do the automation.
 
 
 
