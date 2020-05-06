@@ -143,7 +143,14 @@ To setup the Trigger we are going to use **Jenkins** to do the automation:
 10. From the **Post Build Actions** dropdown, we select **Git Publisher**.
 11. We check **Push only if build succeeds** and **Merge Results** options.
 12.  On clicking the **Save** option, we add the Job to our Job List.
+13.  Now from **Build Triggers** section of the **lwtest** job, we select `Build after other projects are built` and mention `Merge-test` as the project to watch.
 
+Thus, the Job has been setup. To Trigger the Build, the **QAT** would run the following command:<br>
+`curl --user "<username>:<password>" JENKINS_URL/job/Mergetest/build?token=TOKEN_NAME`
+
+e.g. `curl --user "admin:admin" http://192.123.32.2932:8080/job/Merge-test/build?token=redhat`
+
+So, after merging, the **lwtest** Job is again fired, so that the updated code can be downloaded in the Server system to run in the web-server.
 
 
 
