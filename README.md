@@ -48,9 +48,20 @@ As we are going to automate the process, we are going to configure Jenkins for c
 
 **Jenkins** would do another important task from the **Quality Assurance Team**. If the `dev1` branch is working fine, then Jenkins would merge it with the `master` branch, on being triggered to do so.
 
-We create 2 directories on our Desktop.
+We create 2 directories on our Desktop directory from the terminal.
 - lwtest
 - lwtestdev
+
+The codes downloaded from **GitHub** by **Jenkins** would be placed in these folders according to their branches.
+
+Now, lets configure Jenkins to do all those tasks.
+
+### 3. Configuring Jenkins
+
+Lets start the Jenkins process from RHEL 8 by the command: `systemctl start jenkins`<br>
+Now, on visiting the port **8080**, we can see the Jenkins Control Panel running.
+
+But, we are going to configure it from Host / Developer system 
 
 
 
