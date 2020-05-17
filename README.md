@@ -1,29 +1,17 @@
-# Linux World DevOps Training - Assignment
+# Linux World DevOps Training
 ### Author: AVIK KUNDU [<kundu.abheek1999@gmail.com>]
 JOB#1
-Create container image that’s has Jenkins installed  using dockerfile 
+If Developer push to dev branch then Jenkins will fetch from dev and deploy on dev-docker environment.
 
 JOB#2
-When we launch this image, it should automatically starts Jenkins service in the container.
-
+If Developer push to master branch then Jenkins will fetch from master and deploy on master-docke environment.
+both dev-docker and master-docker environment are on different docker containers.
 
 JOB#3
-Create a job chain of job1, job2, job3 and  job4 using build pipeline plugin in Jenkins 
+Jenkins will check (test) for the website running in dev-docker environment. If it is running fine then Jenkins will merge the dev branch to master branch and trigger #job 2
 
-JOB#4
-Job1 : Pull  the Github repo automatically when some developers push repo to Github.
+This is the repository where the Project has been uploaded.
 
-JOB#5
-Job2 : By looking at the code or program file, Jenkins should automatically start the respective language interpreter install image container to deploy code ( eg. If code is of  PHP, then Jenkins should start the container that has PHP already installed ).
-
-JOB#6
-Job3 : Test your app if it  is working or not.
-
-JOB#7
-Job4 : if app is not working , then send email to developer with error messages.
-
-JOB#8
-Create One extra job job5 for monitor : If container where app is running. fails due to any reson then this job should automatically start the container again.
 
 ### 1. Setting up the Development/Host  System
 
